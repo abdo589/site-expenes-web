@@ -868,6 +868,19 @@ async function renderAccount() {
   });
 }
 
+// Ripple on every button press.
+document.addEventListener("pointerdown", (e) => {
+  const b = e.target.closest(".btn");
+  if (!b || b.disabled || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const r = b.getBoundingClientRect();
+  const d = Math.max(r.width, r.height);
+  const s = document.createElement("span");
+  s.className = "ripple";
+  s.style.cssText = `width:${d}px;height:${d}px;left:${e.clientX - r.left - d / 2}px;top:${e.clientY - r.top - d / 2}px`;
+  b.append(s);
+  setTimeout(() => s.remove(), 650);
+});
+
 sb.auth.getSession().then(({ data }) => {
   if (!data.session) $("#login").classList.remove("hide");
 });

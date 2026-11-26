@@ -175,6 +175,47 @@ tr.click{cursor:pointer}tr.click:hover td{background:color-mix(in srgb,var(--pri
   .stack td:empty{display:none}.f2{grid-template-columns:1fr}
   .kpis{grid-template-columns:1fr 1fr}.kpi{flex-direction:column;gap:8px}.kpi .ic{width:36px;height:36px}
 }
+
+/* ---------- motion + soft orange neon (with the blue) ---------- */
+:root{--neon:#ff8a3d;--neon-soft:#ff8a3d55;--glow:0 0 0 1px #ff8a3d40,0 0 14px #ff8a3d40,0 0 28px #ff8a3d22}
+.btn{position:relative;overflow:hidden;transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .2s,border-color .2s}
+.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 18px #0f172a1f;border-color:var(--neon-soft)}
+.btn:active:not(:disabled){transform:translateY(0) scale(.98)}
+.btn.primary{background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 4px 14px #2563eb40}
+.btn.primary:hover:not(:disabled){box-shadow:0 8px 22px #2563eb55,var(--glow);border-color:var(--neon)}
+.btn.good:hover:not(:disabled){box-shadow:0 8px 22px #05966955,0 0 16px #ff8a3d33}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,#ffffff55 50%,transparent 65%);transform:translateX(120%);pointer-events:none}
+.btn:hover:not(:disabled)::after{animation:shine .8s ease}
+@keyframes shine{to{transform:translateX(-120%)}}
+.ripple{position:absolute;border-radius:50%;transform:scale(0);background:#ff8a3d66;animation:ripple .6s ease-out;pointer-events:none}
+@keyframes ripple{to{transform:scale(3);opacity:0}}
+:focus-visible{outline:2px solid var(--neon);outline-offset:2px;box-shadow:0 0 12px var(--neon-soft)}
+input:focus,select:focus,textarea:focus{border-color:var(--pri);box-shadow:0 0 0 3px #2563eb26,0 0 14px #ff8a3d2e}
+.logo{box-shadow:0 0 14px #ff8a3d55;animation:glow 3.2s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 22px #ff8a3d88,0 0 6px #38bdf866}}
+.nav button{position:relative;transition:background .2s,color .2s,transform .18s}
+.nav button:hover{transform:translateX(-3px)}
+.nav button[aria-current=page]{background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 6px 18px #2563eb44}
+.nav button[aria-current=page]::before{content:"";position:absolute;inset-inline-start:-14px;top:8px;bottom:8px;width:4px;border-radius:4px;background:var(--neon);box-shadow:0 0 10px var(--neon),0 0 20px var(--neon-soft)}
+.nav .badge,.bottom .badge{box-shadow:0 0 10px #ff8a3d99;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 18px #ff8a3dcc}}
+.bottom button{transition:color .2s,transform .18s}
+.bottom button[aria-current=page]{transform:translateY(-2px)}
+.bottom button[aria-current=page] svg{filter:drop-shadow(0 0 6px #ff8a3d99)}
+.card{transition:transform .2s,box-shadow .25s,border-color .25s}
+.kpi:hover,.slip:hover{transform:translateY(-3px);border-color:var(--neon-soft);box-shadow:0 10px 26px #0f172a14,0 0 18px #ff8a3d22}
+.shoot .big{animation:breathe 2.6s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.05);box-shadow:0 10px 30px #2563eb66,0 0 0 8px #ff8a3d22,0 0 26px #ff8a3d55}}
+.shoot:hover{border-color:var(--neon);box-shadow:0 0 22px #ff8a3d2e}
+.seg button{transition:background .2s,color .2s,box-shadow .2s}
+.seg button[aria-pressed=true]{box-shadow:var(--shadow),0 0 0 1px #ff8a3d55,0 0 12px #ff8a3d2e}
+tr.click{transition:background .15s}
+.bars .fill{background:linear-gradient(90deg,#ff8a3d,#2563eb 45%);box-shadow:0 0 10px #ff8a3d44;animation:grow .9s cubic-bezier(.2,.8,.2,1) both;transform-origin:right}
+@keyframes grow{from{transform:scaleX(0)}}
+.toast{border:1px solid #ff8a3d66;box-shadow:0 10px 30px #0004,0 0 18px #ff8a3d44}
+#view>*{animation:rise .35s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
 </head>
